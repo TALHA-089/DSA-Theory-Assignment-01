@@ -13,25 +13,30 @@ void Menu(){
 }
 
 void GreaterNextElement(int array[], int size){
-    bool found = false;
-    for(int i = 0; i < size; i++){
-        found = false;
-        if(i == size - 1){
-            array[i] = -1;
-        }else{
-            for(int j = i + 1; j < size; j++){
-            if(array[j] > array[i]){
-                array[i] = array[j];
-                found = true;
-                break;
-            }
-            }
+
+    Stack stack1 = Stack(size);
+    int result[size];
+
+    for (int i = size - 1; i >= 0; i--) {
+        while (!stack1.isEmpty() && stack1.getMin() <= array[i]) {
+            int temp;
+            stack1.Pop(temp);
         }
-        if(!found){
-            array[i] = -1;
+
+        if (stack1.isEmpty()) {
+            result[i] = -1;
+        } else {
+            result[i] = stack1.getMin();
         }
+
+        stack1.Push(array[i]);
+    }
+
+    for (int i = 0; i < size; i++) {
+        array[i] = result[i];
     }
 }
+
 
 int main(){
     int maxSize;
@@ -136,7 +141,7 @@ int main(){
         }
     }
     
-    stack.~Stack();
+
     cout << "\nGoodBye!\n";
     cout << endl << endl;
     return 0;
