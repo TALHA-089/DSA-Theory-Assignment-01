@@ -1,7 +1,6 @@
 #pragma once
 #include "Stack.h"
-#include <iostream>
-using namespace std;
+
 
 Stack::Stack(int max) {
     top = -1;
@@ -54,7 +53,9 @@ void Stack::Pop(int &item) {
     if (poppedValue < min) {
         item = min;
         min = 2 * min - poppedValue;
-    } else {
+    } else if(top == 0) {
+        item = poppedValue;
+    }else{
         item = poppedValue;
     }
 
@@ -77,4 +78,12 @@ int Stack::getMin() {
 
 int Stack::getMaxSize() {
     return this->max;
+}
+
+int Stack::peek(){
+    if(top != -1){
+        return stack[top];
+    }else{
+        return -1;
+    }
 }
