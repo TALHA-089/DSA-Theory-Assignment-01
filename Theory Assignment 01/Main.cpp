@@ -14,27 +14,28 @@ void Menu(){
 
 void GreaterNextElement(int array[], int size){
 
-    Stack stack1 = Stack(size);
+    Stack GNEStack = Stack(size);
     int result[size];
 
     for (int i = size - 1; i >= 0; i--) {
-        while (!stack1.isEmpty() && stack1.getMin() <= array[i]) {
+        while (!GNEStack.isEmpty() && GNEStack.getMin() <= array[i]) {
             int temp;
-            stack1.Pop(temp);
+            GNEStack.Pop(temp);
         }
 
-        if (stack1.isEmpty()) {
+        if (GNEStack.isEmpty()) {
             result[i] = -1;
         } else {
-            result[i] = stack1.getMin();
+            result[i] = GNEStack.getMin();
         }
 
-        stack1.Push(array[i]);
+        GNEStack.Push(array[i]);
     }
 
     for (int i = 0; i < size; i++) {
         array[i] = result[i];
     }
+  
 }
 
 
